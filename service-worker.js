@@ -1,5 +1,5 @@
 /* Maarifa App - Service Worker (offline-first) */
-const VER='maarifa-v3',IMG='maarifa-img-v1',SHELL=['./','./index.html','./manifest.json','./icon-192.png','./icon-512.png'];
+const VER='maarifa-v4',IMG='maarifa-img-v1',SHELL=['./','./index.html','./manifest.json','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VER).then(c=>Promise.all(SHELL.map(u=>c.add(u).catch(()=>{})))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==VER&&x!==IMG).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
